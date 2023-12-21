@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Binance Resender</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: #a6a6a6;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        footer {
+            z-index: 2;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #f0e68c;
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #7CFC00;
+            z-index: 2;
+            position: relative;
+            padding: 20px 40px;
+            margin: 0;
+            animation: textGlowAndBlur 1.5s ease-in-out infinite alternate;
+            border: 2px solid #008000;
+            box-shadow: 0 0 10px #008000, 0 0 20px #008000, 0 0 30px #008000;
+            border-radius: 5px;
+            font-size: calc(20px + 3vw);
+        }
+
+        @keyframes textGlowAndBlur {
+            from {
+                text-shadow: 0 0 5px #7CFC00, 0 0 15px #7CFC00, 0 0 25px #7CFC00;
+                box-shadow: 0 0 20px #008000, 0 0 30px #008000, 0 0 40px #008000;
+            }
+            to {
+                text-shadow: 0 0 10px #7CFC00, 0 0 30px #7CFC00, 0 0 50px #7CFC00;
+                box-shadow: 0 0 30px #008000, 0 0 40px #008000, 0 0 50px #008000;
+                filter: blur(1px);
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+<h1>Welcome Binance Resender</h1>
+<canvas id="matrixCanvas"></canvas>
+<footer>
+    Email：
+    <a href="mailto:pyted@outlook.com">pyted@outlook.com</a>
+    &nbsp; &nbsp;
+    GitHub:
+    <a href="https://github.com/pyted/binance_resender">https://github.com/pyted/binance_resender</a>
+</footer>
+<script>
+    const canvas = document.getElementById('matrixCanvas');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const ctx = canvas.getContext('2d');
+
+    const characters = '0123456789ABCDEF';
+    const fontSize = 10;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#00ff00';
+        ctx.font = fontSize + 'px "Courier New"';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+
+    setInterval(drawMatrix, 33);
+</script>
+</body>
+</html>
