@@ -24,7 +24,6 @@ def resender(request, path, api_url):
     for key in header_keys:
         if key.lower() in request_header_lower_map.keys():
             headers[key] = request_header_lower_map[key.lower()]
-
     method = request.method.lower()
     params = {}
     if method == 'get':
@@ -33,6 +32,9 @@ def resender(request, path, api_url):
             params[key] = value
     else:
         for key in request.POST.keys():
+            value = request.GET[key]
+            params[key] = value
+        for key in request.GET.keys():
             value = request.GET[key]
             params[key] = value
     params.pop('url', None)
