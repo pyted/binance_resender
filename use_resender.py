@@ -6,3 +6,4 @@ if __name__ == '__main__':
     api = API(proxy_host=proxy_host)
     ticker_result = api.spot.market.get_ticker_bookTicker(symbol='BTCUSDT')
     eprint(ticker_result)
+
