@@ -18,7 +18,7 @@ class AllowHostModel(models.Model):
 
     ip = models.CharField(max_length=255, null=False, blank=False, verbose_name='IP',
                           validators=[validate_ip], unique=True)
-    datetime = models.DateTimeField(auto_now=now, verbose_name='AlterDatetime')
+    datetime = models.DateTimeField(auto_now=now, verbose_name='修改时间')
 
     def save(
             self, force_insert=False, force_update=False, using=None, update_fields=None
@@ -36,11 +36,11 @@ class SenderLogManagerModel(models.Model):
         verbose_name = verbose_name_plural = '2. 日志管理'
 
     USE_LOG_CHOICES = (
-        (0, 'N0'),
-        (1, 'YES'),
+        (0, '否'),
+        (1, '是'),
     )
     use_log = models.PositiveIntegerField(
-        choices=USE_LOG_CHOICES, default=USE_LOG_CHOICES[0][0], verbose_name='USE LOG'
+        choices=USE_LOG_CHOICES, default=USE_LOG_CHOICES[0][0], verbose_name='是否记录日志'
     )
 
     def __str__(self):
@@ -52,13 +52,13 @@ class SenderLogModel(models.Model):
         verbose_name = verbose_name_plural = '3. 日志信息'
 
     STATUS_CHOICES = (
-        (1, 'SUCCEED'),
-        (0, 'FAIL'),
+        (1, '成功'),
+        (0, '失败'),
     )
-    ip = models.CharField(max_length=255, blank=False, null=False, verbose_name='Customer IP')
-    datetime = models.DateTimeField(auto_now=now, verbose_name='Datetime')
-    status = models.IntegerField(choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0], verbose_name='Status')
-    error_msg = models.TextField(default='',blank=True,null=True,verbose_name='Error Msg')
+    ip = models.CharField(max_length=255, blank=False, null=False, verbose_name='IP')
+    datetime = models.DateTimeField(auto_now=now, verbose_name='日期时间')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0], verbose_name='状态')
+    error_msg = models.TextField(default='', blank=True, null=True, verbose_name='异常信息')
 
     def __str__(self):
         return self.ip
