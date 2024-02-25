@@ -5,3 +5,5 @@ urllib3==1.26.12
 binance_interface
 candlelite
 paux
+pysqlite3
+pysqlite3-binary
