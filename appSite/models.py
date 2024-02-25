@@ -14,7 +14,7 @@ def validate_ip(ip):
 # Create your models here.
 class AllowHostModel(models.Model):
     class Meta():
-        verbose_name = verbose_name_plural = '1. AllowHost'
+        verbose_name = verbose_name_plural = '1. 白名单'
 
     ip = models.CharField(max_length=255, null=False, blank=False, verbose_name='IP',
                           validators=[validate_ip], unique=True)
@@ -33,7 +33,7 @@ class AllowHostModel(models.Model):
 
 class SenderLogManagerModel(models.Model):
     class Meta():
-        verbose_name = verbose_name_plural = '2. SenderLogManager'
+        verbose_name = verbose_name_plural = '2. 日志管理'
 
     USE_LOG_CHOICES = (
         (0, 'N0'),
@@ -49,7 +49,7 @@ class SenderLogManagerModel(models.Model):
 
 class SenderLogModel(models.Model):
     class Meta():
-        verbose_name = verbose_name_plural = '3. SenderLogDetail'
+        verbose_name = verbose_name_plural = '3. 日志信息'
 
     STATUS_CHOICES = (
         (1, 'SUCCEED'),
