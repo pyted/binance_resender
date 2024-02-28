@@ -1,4 +1,4 @@
-# binance_resender （PyTED量化交易研究院）
+# Binance_resender （PyTED量化交易研究院）
 
 ## 1. Binance_resender有什么用？
 
